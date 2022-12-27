@@ -241,21 +241,34 @@ public class Fragment_People extends Fragment {
 
         //파이어베이스에서 이미지 다운 받고 화면에 표시하기
         StorageReference imageRef = storageRef.child(myUid + "profile.jpg");
-        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                String downloadUrl = uri.toString();
-                Glide.with(getActivity())
-                        .load(downloadUrl)
-                        .into(userProfileImage);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+        if (imageRef == null){
+            Log.v("TagTagTag",imageRef.toString());
+        } else {
+            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // Got the download URL for 'users/me/profile.png'
+                    //액티비티와 프래그먼트 생명주기 차이로 발생하는 getActivity-null 값 방지
+                    if(getActivity() == null){
+                        Log.v("SUPERTAG", "ININININININ");
+                    }
+                    else{
+                        String downloadUrl = uri.toString();
+                        Glide.with(getActivity())
+                                .load(downloadUrl)
+                                .into(userProfileImage);
+                    }
+
+                    }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                    Log.v("TagTagTag","FailTag");
+                }
+            });
+
+        }
 
     }
 }

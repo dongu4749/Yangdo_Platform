@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,15 +35,21 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import se.jbnu.yangdoplatform.HomeActivity;
 import se.jbnu.yangdoplatform.R;
+import se.jbnu.yangdoplatform.model.UserModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -150,7 +158,7 @@ public class Fragment_Profile_Modifying extends Fragment {
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         userProfileImage = v.findViewById(R.id.userProfileImage);
-        TextView user_nicknameInModifying = v.findViewById(R.id.user_nicknameInModifying);
+        EditText user_nicknameInModifying = v.findViewById(R.id.user_nicknameInModifying);
         Button complete_modifying = v.findViewById(R.id.complete_modifying);
 
         //userName을 이미지에 저장하기 위한 몸부림
@@ -189,11 +197,26 @@ public class Fragment_Profile_Modifying extends Fragment {
             String userName = getArguments().getString("userName");
             user_nicknameInModifying.setText(userName);
         }
+        user_nicknameInModifying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user_nicknameInModifying.setText("");
+            }
+        });
 
         //버튼 클릭시 다시 내 정보로 이동(닉네임 변경은 아직 불가)
         complete_modifying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //수정한 닉네임 파이어베이스에 저장
+                String modifiedUser_nickname = user_nicknameInModifying.getText().toString();
+                // 아무것도 입력하지 않았을 때 방지
+                if(modifiedUser_nickname == null){
+                    modifiedUser_nickname = String.valueOf((char) ((int) (new Random().nextInt(11171))+44032));
+                }
+                //닉네임 파이어베이스에 넣기
+                FirebaseDatabase.getInstance().getReference().child("users").child(myUid).child("userName").setValue(modifiedUser_nickname);
+
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 Fragment_MyInfo fragment_myInfo = new Fragment_MyInfo();
 
@@ -300,10 +323,14 @@ public class Fragment_Profile_Modifying extends Fragment {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
-                String downloadUrl = uri.toString();
-                Glide.with(getActivity())
-                        .load(downloadUrl)
-                        .into(userProfileImage);
+                if(uri == null){
+                    //아무것도 실행하지 않음
+                }else {
+                    String downloadUrl = uri.toString();
+                    Glide.with(getActivity())
+                            .load(downloadUrl)
+                            .into(userProfileImage);
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

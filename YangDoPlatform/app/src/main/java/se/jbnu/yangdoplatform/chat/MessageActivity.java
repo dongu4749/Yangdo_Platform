@@ -262,10 +262,10 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
-                String downloadUrl = uri.toString();
-                Glide.with(MessageActivity.this)
-                        .load(downloadUrl)
-                        .into(userProfileImage);
+                    String downloadUrl = uri.toString();
+                    Glide.with(MessageActivity.this)
+                            .load(downloadUrl)
+                            .into(userProfileImage);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

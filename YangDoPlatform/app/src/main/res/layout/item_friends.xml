@@ -16,7 +16,8 @@
             android:id="@+id/frienditem_imageview"
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:src="@drawable/user_img"/>
 
         <TextView
             android:id="@+id/frienditem_textview"
