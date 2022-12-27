@@ -42,6 +42,7 @@ import java.util.TreeMap;
 import se.jbnu.yangdoplatform.R;
 import se.jbnu.yangdoplatform.chat.MessageActivity;
 import se.jbnu.yangdoplatform.model.ChatModel;
+import se.jbnu.yangdoplatform.model.UserModel;
 
 public class Fragment_Chat extends Fragment {
 
@@ -144,14 +145,26 @@ public class Fragment_Chat extends Fragment {
                 }
             }
 
-            //profile Image
+            //profile 이름 받아오기
             showTheImageOntheScreen(destinationUid, friendViewHolder.imageView);
+            FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    UserModel userModel = snapshot.getValue(UserModel.class);
+                    friendViewHolder.textView_title.setText(userModel.userName);
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
 
             Map<String, ChatModel.Comment> commentMap = new TreeMap<>(Collections.reverseOrder());
             commentMap.putAll(chatModels.get(position).comments);
             String lastMessageKey = (String) commentMap.keySet().toArray()[0];
+
             friendViewHolder.textView_last_message.setText(chatModels.get(position).comments.get(lastMessageKey).message);
 
             friendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
