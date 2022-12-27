@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/dongu/AndroidStudioProjects/YangDoPlatform/app/src/main/res/drawable-v24/button_shape_primary.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/AndroidStudioProjects/YangDoPlatform/app/src/main/res/drawable-v24/button_shape_secondary.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/AndroidStudioProjects/YangDoPlatform/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/AndroidStudioProjects/YangDoPlatform/app/src/main/res/layout/activity_sign_up.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/AndroidStudioProjects/YangDoPlatform/app/src/main/res/layout/activity_signin.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/AndroidStudioProjects/YangDoPlatform/app/src/main/res/layout/activity_splash.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/drawable-v24/bottom_navigation_select_color.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/drawable/ic_launcher_background.xml" value="0.246" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/drawable/ic_main_background.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/drawable/screen_background.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_board_detail.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_board_register.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_home.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_kakao_login.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_message.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_signin.xml" value="0.264" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/activity_splash.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__chat.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__home.xml" value="0.23773584905660378" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__my_info.xml" value="0.264" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__people.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__profile__modifying.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__setting.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment__transaction_history.xml" value="0.23125" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/fragment_chat_nakhyun.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/item_chat.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/item_chat_nak.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/item_friends.xml" value="0.1" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/item_messagebox.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/item_msg.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/item_msg2.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/msg_item.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/layout/row_chat.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/menu/bottom_nav.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/menu/toolbar_menu.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/xml/settings_preference.xml" value="0.24583333333333332" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

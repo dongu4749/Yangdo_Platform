@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "348646375172",
+    "project_id": "yangdo-yo-8f58f",
+    "storage_bucket": "yangdo-yo-8f58f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348646375172:android:ddabf8ce872ae184e75a51",
+        "android_client_info": {
+          "package_name": "se.jbnu.yangdoplatform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348646375172-otivnaiqmnq3uh2i63vs4e6bheg046eq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "se.jbnu.yangdoplatform",
+            "certificate_hash": "5bb15908c28171804c5eb0d822b92e26da8fa766"
+          }
+        },
+        {
+          "client_id": "348646375172-sbel97qkuhd0ojdlnfa9lrusv8m2uq8p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "se.jbnu.yangdoplatform",
+            "certificate_hash": "586b205f1ca0c784b980c3748b33b79440e7bb66"
+          }
+        },
+        {
+          "client_id": "348646375172-8gv3o386r6c552pfmshj1bjm1r49js8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt3sGrJBmgCxbrOGlD6vy_m9w0-bkFlLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348646375172-8gv3o386r6c552pfmshj1bjm1r49js8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
