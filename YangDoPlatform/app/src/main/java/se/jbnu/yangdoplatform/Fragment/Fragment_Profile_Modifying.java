@@ -204,15 +204,17 @@ public class Fragment_Profile_Modifying extends Fragment {
             }
         });
 
-        //버튼 클릭시 다시 내 정보로 이동(닉네임 변경은 아직 불가)
+        //버튼 클릭시 다시 내 정보로 이동
         complete_modifying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //수정한 닉네임 파이어베이스에 저장
-                String modifiedUser_nickname = user_nicknameInModifying.getText().toString();
+                String modifiedUser_nickname;
                 // 아무것도 입력하지 않았을 때 방지
-                if(modifiedUser_nickname == null){
+                if(user_nicknameInModifying.getText().toString() == null){
                     modifiedUser_nickname = String.valueOf((char) ((int) (new Random().nextInt(11171))+44032));
+                } else{
+                    modifiedUser_nickname = user_nicknameInModifying.getText().toString();
                 }
                 //닉네임 파이어베이스에 넣기
                 FirebaseDatabase.getInstance().getReference().child("users").child(myUid).child("userName").setValue(modifiedUser_nickname);

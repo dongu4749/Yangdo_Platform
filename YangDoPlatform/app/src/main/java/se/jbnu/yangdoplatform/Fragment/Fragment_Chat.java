@@ -100,7 +100,6 @@ public class Fragment_Chat extends Fragment {
         private List<ChatModel> chatModels = new ArrayList<>();
         private String uid;
 
-        //대화가 담기는 부분
         private ArrayList<String> destinationUsers = new ArrayList<>();
 
 
@@ -114,6 +113,7 @@ public class Fragment_Chat extends Fragment {
                     for (DataSnapshot item :dataSnapshot.getChildren()){
                         chatModels.add(item.getValue(ChatModel.class));
                     }
+                    //ListView를 새로고침해준다
                     notifyDataSetChanged();
                 }
 
@@ -137,7 +137,7 @@ public class Fragment_Chat extends Fragment {
             FriendViewHolder friendViewHolder = (FriendViewHolder) holder;
             String destinationUid = null;
 
-            //챗방에 있는 유저를 체크한다. 일일이
+            //챗방에 있는 유저를 체크한다. 일일이2
             for(String user : chatModels.get(position).users.keySet()) {
                 if(!user.equals(uid)){
                     destinationUid = user;
@@ -167,6 +167,8 @@ public class Fragment_Chat extends Fragment {
 
             friendViewHolder.textView_last_message.setText(chatModels.get(position).comments.get(lastMessageKey).message);
 
+
+            //아이템을 클릭 시 -  채팅방으로 이동(MessageActivity.class)
             friendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
