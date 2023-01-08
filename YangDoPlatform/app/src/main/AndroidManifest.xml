@@ -28,6 +28,9 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
+            android:name=".GalleryService"
+            android:exported="false"/>
+        <activity
             android:name=".SigninActivity"
             android:exported="true">
             <intent-filter>

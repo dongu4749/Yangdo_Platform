@@ -196,10 +196,12 @@ public class Fragment_MyInfo extends Fragment {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
+                if(uri != null && getActivity() != null) {
                     String downloadUrl = uri.toString();
                     Glide.with(getActivity())
                             .load(downloadUrl)
                             .into(imageView);
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

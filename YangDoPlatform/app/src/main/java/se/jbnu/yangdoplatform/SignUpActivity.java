@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.check).setOnClickListener(onClickListener);
         signUp_userProfileImage = findViewById(R.id.signUp_userProfileImage);
-        //nullPoint Error 방지코드_/초기 이미지 넣기 실패
+        // nullPoint Error 방지코드_/초기 이미지 넣기 실패
         File firstProfileimageFile = new File("\\src\\main\\res\\drawable-v24\\user_img.png");
         String absolutePath = firstProfileimageFile.getAbsolutePath();
         filePath = Uri.parse(absolutePath);
@@ -68,23 +68,8 @@ public class SignUpActivity extends AppCompatActivity {
     View.OnClickListener signUp_userProfileImageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (ContextCompat.checkSelfPermission(SignUpActivity.this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-            {
-                navigateGallery();
 
-            }
-            else if (ActivityCompat.shouldShowRequestPermissionRationale(SignUpActivity.this, READ_EXTERNAL_STORAGE)){
-                showPermissionContextPopup();
-            }
-
-            else
-            {
-                ActivityCompat.requestPermissions(SignUpActivity.this,
-                        new String[]{READ_EXTERNAL_STORAGE},
-                        1000
-                );
-            }
-
+            new GalleryService().navigateActivity(SignUpActivity.this);
         }
     };
 
@@ -147,16 +132,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    //갤러리 오픈 메서드
+    // 갤러리 오픈 메서드
     private void navigateGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, SELECT_PICTURE);
     }
 
-    //갤러리 오픈 전 동의구하기 메서드
-    private void showPermissionContextPopup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this)
+
+    // 갤러리 오픈 전 동의구하기 메서드
+    private void showPermissionContextPopup(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
                 .setTitle("권한이 필요합니다.")
                 .setMessage("프로필 이미지를 바꾸기 위해서는 갤러리 접근 권한이 필요합니다.")
                 .setPositiveButton("동의하기", new DialogInterface.OnClickListener() {
@@ -177,7 +163,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void uploadImageToFirebase(Bitmap bitmap) {
 
-        //이미지 파일명을 구분하기 위함
+        // 이미지 파일명을 구분하기 위함
         String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
@@ -217,8 +203,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
-
-            //화면에 띄우기
+            // 화면에 띄우기
             Glide.with(SignUpActivity.this)
                     .load(filePath)
                     .into(signUp_userProfileImage);
