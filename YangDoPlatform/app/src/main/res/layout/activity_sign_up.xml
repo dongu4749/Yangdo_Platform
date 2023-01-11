@@ -18,6 +18,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/signUp_userProfileImage"
+            android:layout_width="111dp"
+            android:layout_height="93dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_img"/>
+
         <EditText
             android:id="@+id/user_id"
             android:layout_width="match_parent"

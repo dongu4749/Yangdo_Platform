@@ -77,6 +77,8 @@ public class Fragment_People extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
     public static Fragment_People newInstance() {
         return new Fragment_People();
     }
@@ -87,12 +89,11 @@ public class Fragment_People extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-
             @Override
-
             public void handleOnBackPressed() {
-
                 // Handle the back button event
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("앱 종료");
@@ -111,9 +112,7 @@ public class Fragment_People extends Fragment {
                 });
                 builder.create().show();
             }
-
         };
-
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
@@ -129,6 +128,8 @@ public class Fragment_People extends Fragment {
 
         return v;
     }
+
+
     class Fragment_Transaction_historyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<UserModel> userModels;
@@ -150,19 +151,15 @@ public class Fragment_People extends Fragment {
                         }
                         userModels.add(userModel);
                     }
-
                     notifyDataSetChanged();
-
                 }
+
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) { }
             });
-
-
         }
+
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -170,11 +167,10 @@ public class Fragment_People extends Fragment {
             return new PeopleViewHolder(view);
         }
 
+
         @SuppressLint("RecyclerView")
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-
-
 
 
             FirebaseDatabase.getInstance().getReference().child("users").child(myUid).addValueEventListener(new ValueEventListener() {
@@ -191,14 +187,6 @@ public class Fragment_People extends Fragment {
 
                 }
             });
-
-            //수정 전 코드
-//            Glide.with
-//                    (holder.itemView.getContext())
-//                    .load(userModels.get(position).profileImageUrl)
-//                    .apply(new RequestOptions().circleCrop())
-//                    .into(((PeopleViewHolder)holder).imageView);
-//            ((PeopleViewHolder)holder).textView.setText(userModels.get(position).userName);
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -228,34 +216,46 @@ public class Fragment_People extends Fragment {
             public PeopleViewHolder(View view) {
                 super(view);
                 imageView = (ImageView) view.findViewById(R.id.frienditem_imageview);
-//                showTheImageOntheScreen(myUid, imageView);
                 textView = (TextView) view.findViewById(R.id.frienditem_textview);
             }
         }
     }
 
     private void showTheImageOntheScreen(String myUid, ImageView userProfileImage) {
-        //파이어베이스에 있는 이미지 가져오기
+        // 파이어베이스에 있는 이미지 가져오기
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
-        //파이어베이스에서 이미지 다운 받고 화면에 표시하기
+        // 파이어베이스에서 이미지 다운 받고 화면에 표시하기
         StorageReference imageRef = storageRef.child(myUid + "profile.jpg");
-        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                String downloadUrl = uri.toString();
-                Glide.with(getActivity())
-                        .load(downloadUrl)
-                        .into(userProfileImage);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+        if (imageRef == null){
+            Log.v("TagTagTag",imageRef.toString());
+        } else {
+            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // Got the download URL for 'users/me/profile.png'
+                    // 액티비티와 프래그먼트 생명주기 차이로 발생하는 getActivity-null 값 방지
+                    if(getActivity() == null){
+                        Log.v("SUPERTAG", "ININININININ");
+                    }
+                    else{
+                        String downloadUrl = uri.toString();
+                        Glide.with(getActivity())
+                                .load(downloadUrl)
+                                .into(userProfileImage);
+                    }
+
+                    }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                    Log.v("TagTagTag","FailTag");
+                }
+            });
+
+        }
 
     }
 }

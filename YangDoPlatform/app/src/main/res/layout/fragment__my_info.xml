@@ -40,7 +40,7 @@
             android:layout_height="93dp"
             android:layout_marginStart="52dp"
             android:layout_marginTop="64dp"
-
+            android:src="@drawable/user_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +51,7 @@
             android:layout_marginStart="240dp"
             android:layout_marginTop="64dp"
             android:text=""
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"

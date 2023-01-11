@@ -60,7 +60,6 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-//        createNotificationChannel();
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
         destinatonUid = getIntent().getStringExtra("destinationUid"); // 채팅을 당하는 아이디
@@ -83,7 +82,9 @@ public class MessageActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            //채팅방이 존재하지 않을때 채팅방을 만들고 주고 받는 메세지를 화면에 표시해준다
                             checkChatRoom();
+
                         }
                     });
                 }else {
@@ -102,10 +103,12 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+        //메세지를 보낸 후 모든 메세지를 화면에 표시하기 위해 호출해준다.
         checkChatRoom();
     }
 
 
+//채팅방들 중 자신이 있는 지 확인하고 자신이 있으면 채팅할 상대방 id가 포함돼 있을때 채팅방 key를 가져와 저장한다.
     void  checkChatRoom(){
 
         FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,6 +119,7 @@ public class MessageActivity extends AppCompatActivity {
                     if(chatModel.users.containsKey(destinatonUid)){   // 채팅방 중복 검사
                         chatRoomUid = item.getKey();  // key 값은 방 id를 뜻함
                         button.setEnabled(true);
+                        // setLayoutManager is to set the layout of the contents
                         recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
                         recyclerView.setAdapter(new RecyclerViewAdapter());
                     }
@@ -262,10 +266,10 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
-                String downloadUrl = uri.toString();
-                Glide.with(MessageActivity.this)
-                        .load(downloadUrl)
-                        .into(userProfileImage);
+                    String downloadUrl = uri.toString();
+                    Glide.with(MessageActivity.this)
+                            .load(downloadUrl)
+                            .into(userProfileImage);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -39,21 +39,23 @@
             android:layout_height="93dp"
             android:layout_marginStart="52dp"
             android:layout_marginTop="64dp"
-
+            android:src="@drawable/user_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <EditText
             android:id="@+id/user_nicknameInModifying"
-            android:layout_width="91dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="240dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="200dp"
             android:layout_marginTop="64dp"
-            android:text="닉네임"
-            android:textSize="20sp"
+            android:hint=""
+            android:textAlignment="center"
             android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/complete_modifying"
             android:layout_width="175dp"
