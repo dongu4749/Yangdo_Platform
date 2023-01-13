@@ -25,6 +25,7 @@ import se.jbnu.yangdoplatform.R
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.*
+import java.util.zip.Inflater
 
 /**
  * A simple [Fragment] subclass.
@@ -32,8 +33,9 @@ import java.util.*
  * create an instance of this fragment.
  */
 class Fragment_Profile_Modifying : Fragment() {
-    private var userProfileImage: ImageView? = null
     private var myUid: String? = null
+
+    private var userProfileImage: ImageView ?= null
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -74,7 +76,7 @@ class Fragment_Profile_Modifying : Fragment() {
 
         // userName을 이미지에 저장하기 위한 몸부림
         myUid = FirebaseAuth.getInstance().currentUser!!.uid
-        userProfileImage.setOnClickListener(View.OnClickListener {
+        userProfileImage!!.setOnClickListener(View.OnClickListener {
             val galleryService = GalleryService()
             galleryService.navigateFragment(activity, this@Fragment_Profile_Modifying)
         })
@@ -104,7 +106,7 @@ class Fragment_Profile_Modifying : Fragment() {
             }
             // 닉네임 파이어베이스에 넣기
             FirebaseDatabase.getInstance().reference.child("users").child(myUid!!).child("userName").setValue(modifiedUser_nickname)
-            val transaction = getActivity()!!.supportFragmentManager.beginTransaction()
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
             val fragment_myInfo = Fragment_MyInfo()
             transaction.replace(R.id.content_layout, fragment_myInfo)
             // 꼭 commit을 해줘야 바뀐다.
@@ -134,7 +136,7 @@ class Fragment_Profile_Modifying : Fragment() {
             try {
                 Log.v("TESTIN", "tryIN")
                 // Get the selected image as a Bitmap
-                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, filePath)
+                val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, filePath)
                 // Save the Bitmap to Firebase
                 uploadImageToFirebase(bitmap)
             } catch (e: IOException) {
@@ -173,7 +175,7 @@ class Fragment_Profile_Modifying : Fragment() {
         imageRef.downloadUrl.addOnSuccessListener { uri -> // Got the download URL for 'users/me/profile.png'
             if (uri != null) {
                 val downloadUrl = uri.toString()
-                Glide.with(activity!!)
+                Glide.with(requireActivity())
                         .load(downloadUrl)
                         .into(userProfileImage!!)
             }

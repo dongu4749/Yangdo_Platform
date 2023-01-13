@@ -28,21 +28,20 @@ import java.io.IOException
 class SignUpActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
     private val name: EditText? = null
-    private var signUp_userProfileImage: ImageView? = null
+    private var signUp_userProfileImage: ImageView ?= null
     private var filePath: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         mAuth = FirebaseAuth.getInstance()
-        findViewById<View>(R.id.check).setOnClickListener(onClickListener)
         signUp_userProfileImage = findViewById(R.id.signUp_userProfileImage)
+        findViewById<View>(R.id.check).setOnClickListener(onClickListener)
         // nullPoint Error 방지코드_/초기 이미지 넣기 실패
         val firstProfileimageFile = File("\\src\\main\\res\\drawable-v24\\user_img.png")
         val absolutePath = firstProfileimageFile.absolutePath
         filePath = Uri.parse(absolutePath)
         Log.v("filepath_TAG", filePath.toString())
-       // signUp_userProfileImage.setOnClickListener(signUp_userProfileImageOnClickListener)
-        signUp_userProfileImage.setOnClickListener(signUp_userProfileImageOnClickListener)
+        signUp_userProfileImage!!.setOnClickListener(signUp_userProfileImageOnClickListener)
     }
 
     //회원가입 시 프로필 이미지 선택
