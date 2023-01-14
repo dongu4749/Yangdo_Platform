@@ -2,7 +2,7 @@ package se.jbnu.yangdoplatform.model
 
 class ChatModel {
     @JvmField
-    var users: Map<String, Boolean> = HashMap() //채팅방 유저
+    var users: HashMap<String, Boolean> = HashMap() //채팅방 유저
     @JvmField
     var comments: Map<String, Comment> = HashMap() //채팅 메시지
 

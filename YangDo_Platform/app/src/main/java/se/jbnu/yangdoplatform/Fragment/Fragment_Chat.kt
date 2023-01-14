@@ -153,7 +153,7 @@ class Fragment_Chat : Fragment() {
         val imageRef = storageRef.child(myUid + "profile.jpg")
         imageRef.downloadUrl.addOnSuccessListener { uri -> // Got the download URL for 'users/me/profile.png'
             val downloadUrl = uri.toString()
-            Glide.with(activity!!)
+            Glide.with(requireActivity())
                     .load(downloadUrl)
                     .into(userProfileImage)
         }.addOnFailureListener {

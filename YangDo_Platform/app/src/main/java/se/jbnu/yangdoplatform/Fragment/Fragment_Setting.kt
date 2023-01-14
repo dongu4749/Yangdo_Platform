@@ -29,18 +29,18 @@ class Fragment_Setting : PreferenceFragmentCompat() {
         buttonLogout!!.onPreferenceClickListener = Preference.OnPreferenceClickListener { //open browser or intent here
             val signinActivity = SigninActivity()
             signOut()
-            val intent = Intent(activity!!.applicationContext, SplashActivity::class.java)
+            val intent = Intent(requireActivity().applicationContext, SplashActivity::class.java)
             startActivity(intent)
             true
         }
         buttonAccountDelete!!.onPreferenceClickListener = Preference.OnPreferenceClickListener { //open browser or intent here
-            val builder = AlertDialog.Builder(activity!!)
+            val builder = AlertDialog.Builder(requireActivity())
             builder.setTitle("회원탈퇴")
             builder.setMessage("정말 회원탈퇴를 진행하시겠습니까?")
             builder.setPositiveButton("OK") { dialog, which ->
                 val signinActivity = SigninActivity()
                 AccountDelete()
-                val intent = Intent(activity!!.applicationContext, SplashActivity::class.java)
+                val intent = Intent(requireActivity().applicationContext, SplashActivity::class.java)
                 startActivity(intent)
             }
             builder.setNegativeButton("Cancel") { dialog, which -> (activity as HomeActivity?)!!.replaceFragment(newInstance()) }

@@ -37,8 +37,8 @@ class Fragment_MyInfo : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
+            mParam1 = requireArguments().getString(ARG_PARAM1)
+            mParam2 = requireArguments().getString(ARG_PARAM2)
         }
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
             override fun handleOnBackPressed() {
@@ -102,7 +102,7 @@ class Fragment_MyInfo : Fragment() {
             val bundle = Bundle()
             bundle.putString("userName", user_nickname.text.toString())
             //프래그먼트간 이동
-            val transaction = getActivity()!!.supportFragmentManager.beginTransaction()
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
             val fragment_profile_modifying = Fragment_Profile_Modifying()
             fragment_profile_modifying.arguments = bundle
             transaction.replace(R.id.content_layout, fragment_profile_modifying)
@@ -116,7 +116,7 @@ class Fragment_MyInfo : Fragment() {
         imageRef.downloadUrl.addOnSuccessListener { uri -> // Got the download URL for 'users/me/profile.png'
             if (uri != null && getActivity() != null) {
                 val downloadUrl = uri.toString()
-                Glide.with(getActivity()!!)
+                Glide.with(requireActivity())
                         .load(downloadUrl)
                         .into(imageView)
             }

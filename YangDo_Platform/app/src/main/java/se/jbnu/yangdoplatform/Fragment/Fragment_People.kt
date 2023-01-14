@@ -41,8 +41,8 @@ class Fragment_People : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
+            mParam1 = requireArguments().getString(ARG_PARAM1)
+            mParam2 = requireArguments().getString(ARG_PARAM2)
         }
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
             override fun handleOnBackPressed() {
@@ -147,7 +147,7 @@ class Fragment_People : Fragment() {
                 Log.v("SUPERTAG", "ININININININ")
             } else {
                 val downloadUrl = uri.toString()
-                Glide.with(activity!!)
+                Glide.with(requireActivity())
                         .load(downloadUrl)
                         .into(userProfileImage)
             }

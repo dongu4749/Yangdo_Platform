@@ -40,8 +40,8 @@ class MessageActivity : AppCompatActivity() {
         recyclerView = findViewById<View>(R.id.messageActivity_recyclerview) as RecyclerView
         button!!.setOnClickListener {
             val chatModel = ChatModel()
-            chatModel.users.put(uid, true)
-            chatModel.users.put(destinatonUid, true)
+            chatModel.users.put(uid!!, true)
+            chatModel.users.put(destinatonUid!!, true)
             if (chatRoomUid == null) {
                 button!!.isEnabled = false
                 FirebaseDatabase.getInstance().reference.child("chatrooms").push().setValue(chatModel).addOnSuccessListener { //채팅방이 존재하지 않을때 채팅방을 만들고 주고 받는 메세지를 화면에 표시해준다
