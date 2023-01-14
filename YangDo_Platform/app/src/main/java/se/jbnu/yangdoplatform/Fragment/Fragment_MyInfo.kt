@@ -3,9 +3,7 @@ package se.jbnu.yangdoplatform.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -72,6 +70,12 @@ class Fragment_MyInfo : Fragment() {
         activity!!.setSupportActionBar(myToolbar)
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
 
+        //공지사항, QnA, 1대1 문의를 위한 변수 선언
+        val LIST_MENU = arrayOf("공지사항","Q&A","1대1 문의")
+        var listView : ListView = v.findViewById(R.id.function_qna_notification_listview) as ListView
+        val adapter = ArrayAdapter(requireActivity(), R.layout.item_function_qna_notification, R.id.function_qna_notification_textview , LIST_MENU)
+        listView.adapter = adapter
+
         //파이어베이스에 저장된 정보로부터 사용자 불러오기
         //프로필 이름 넣기 위한 변수
         val user_nickname = v.findViewById<View>(R.id.user_nickname) as TextView
@@ -125,6 +129,7 @@ class Fragment_MyInfo : Fragment() {
         }
         return v
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //return super.onOptionsItemSelected(item);
