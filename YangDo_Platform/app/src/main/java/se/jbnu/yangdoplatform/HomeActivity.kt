@@ -19,13 +19,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         mBottomNV = findViewById(R.id.navigation_view)
-        mBottomNV.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+        mBottomNV!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
 
             //NavigationItemSelecte
             bottomNavigate(menuItem.itemId)
             true
         })
-        mBottomNV.setSelectedItemId(R.id.navigation_home)
+        mBottomNV!!.setSelectedItemId(R.id.navigation_home)
     }
 
     fun replaceFragment(fragment: Fragment?) {

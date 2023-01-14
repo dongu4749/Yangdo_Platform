@@ -34,8 +34,8 @@ class Fragment_Home : Fragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
+            mParam1 = requireArguments().getString(ARG_PARAM1)
+            mParam2 = requireArguments().getString(ARG_PARAM2)
         }
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
             override fun handleOnBackPressed() {
@@ -56,8 +56,8 @@ class Fragment_Home : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment__home, container, false)
-        fab_open = AnimationUtils.loadAnimation(activity!!.applicationContext, R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(activity!!.applicationContext, R.anim.fab_close)
+        fab_open = AnimationUtils.loadAnimation(requireActivity().applicationContext, R.anim.fab_open)
+        fab_close = AnimationUtils.loadAnimation(requireActivity().applicationContext, R.anim.fab_close)
         fab_main = v.findViewById<View>(R.id.fab_main) as FloatingActionButton
         fab_home = v.findViewById<View>(R.id.fab_home) as FloatingActionButton
         fab_gym = v.findViewById<View>(R.id.fab_gym) as FloatingActionButton
@@ -77,7 +77,7 @@ class Fragment_Home : Fragment(), View.OnClickListener {
             R.id.fab_gym -> anim()
             R.id.fab_register -> {
                 anim()
-                val intent = Intent(activity!!.applicationContext, Board_RegisterActivity::class.java)
+                val intent = Intent(requireActivity().applicationContext, Board_RegisterActivity::class.java)
                 startActivity(intent)
             }
         }
