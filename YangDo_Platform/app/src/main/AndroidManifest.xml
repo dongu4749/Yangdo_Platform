@@ -16,6 +16,12 @@
             android:name=".Board.Board_RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".Board.OneToOneBoard"
+            android:exported="false" />
+        <activity
+            android:name=".Board.QnABoard"
+            android:exported="false" />
+        <activity
             android:name=".Board.Board_DetailActivity"
             android:exported="false" />
         <activity

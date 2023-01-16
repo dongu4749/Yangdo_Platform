@@ -1,5 +1,6 @@
 package se.jbnu.yangdoplatform.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import se.jbnu.yangdoplatform.Board.OneToOneBoard
+import se.jbnu.yangdoplatform.Board.QnABoard
 import se.jbnu.yangdoplatform.HomeActivity
 import se.jbnu.yangdoplatform.R
 import se.jbnu.yangdoplatform.model.UserModel
@@ -71,10 +74,50 @@ class Fragment_MyInfo : Fragment() {
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         //공지사항, QnA, 1대1 문의를 위한 변수 선언
-        val LIST_MENU = arrayOf("공지사항","Q&A","1대1 문의")
-        var listView : ListView = v.findViewById(R.id.function_qna_notification_listview) as ListView
+        val LIST_MENU = arrayOf("공지사항                                                              ",
+            "Q&A                                                                       ",
+            "1대1 문의                                                              ")
+        var listView : ListView = v.findViewById(R.id.function_qna_notification_listview)
         val adapter = ArrayAdapter(requireActivity(), R.layout.item_function_qna_notification, R.id.function_qna_notification_textview , LIST_MENU)
         listView.adapter = adapter
+
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            when(position){
+                0 -> Toast.makeText(requireActivity(), "공지사항으로 이동합니다.", Toast.LENGTH_SHORT).show()
+                1 -> {
+                    val intent = Intent(requireContext(), QnABoard::class.java)
+                    startActivity(intent)
+                }
+                2 -> {
+                    val intent = Intent(requireContext(), OneToOneBoard::class.java)
+                    startActivity(intent)
+                }
+                else -> Log.v("TESTTAG", position.toString())
+            }
+        }
+
+
+//        listView.setOnItemClickListener  { parent, view, position, id ->
+//            // handle the click event
+//            Log.v("TESTTAG", position.toString())
+//            when(position){
+//                0 -> Toast.makeText(requireActivity(), "공지사항으로 이동합니다.", Toast.LENGTH_SHORT).show()
+//                1 -> {
+//                    val intent = Intent(requireContext(), QnABoard::class.java)
+//                    startActivity(intent)
+//                }
+//                2 -> {
+//                    val intent = Intent(requireContext(), OneToOneBoard::class.java)
+//                    startActivity(intent)
+//                }
+//                else -> Log.v("TESTTAG", position.toString())
+//            }
+//
+//        }
+
+
+
+
 
         //파이어베이스에 저장된 정보로부터 사용자 불러오기
         //프로필 이름 넣기 위한 변수
