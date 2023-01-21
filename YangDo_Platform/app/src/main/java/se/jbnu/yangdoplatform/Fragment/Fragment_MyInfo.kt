@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import se.jbnu.yangdoplatform.Board.OneToOneBoard
-import se.jbnu.yangdoplatform.Board.QnABoard
+import se.jbnu.yangdoplatform.Board.FQABoard
 import se.jbnu.yangdoplatform.HomeActivity
 import se.jbnu.yangdoplatform.R
 import se.jbnu.yangdoplatform.model.UserModel
@@ -75,8 +75,7 @@ class Fragment_MyInfo : Fragment() {
 
         //공지사항, QnA, 1대1 문의를 위한 변수 선언
         val LIST_MENU = arrayOf("공지사항                                                              ",
-            "Q&A                                                                       ",
-            "1대1 문의                                                              ")
+            "자주 묻는 질문                                                                       ",)
         var listView : ListView = v.findViewById(R.id.function_qna_notification_listview)
         val adapter = ArrayAdapter(requireActivity(), R.layout.item_function_qna_notification, R.id.function_qna_notification_textview , LIST_MENU)
         listView.adapter = adapter
@@ -85,11 +84,7 @@ class Fragment_MyInfo : Fragment() {
             when(position){
                 0 -> Toast.makeText(requireActivity(), "공지사항으로 이동합니다.", Toast.LENGTH_SHORT).show()
                 1 -> {
-                    val intent = Intent(requireContext(), QnABoard::class.java)
-                    startActivity(intent)
-                }
-                2 -> {
-                    val intent = Intent(requireContext(), OneToOneBoard::class.java)
+                    val intent = Intent(requireContext(), FQABoard::class.java)
                     startActivity(intent)
                 }
                 else -> Log.v("TESTTAG", position.toString())

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import se.jbnu.yangdoplatform.R
 
-class Board_DetailActivity : AppCompatActivity() {
+class Board_From_FAQ_Activity : AppCompatActivity() {
     var title_tv: TextView? = null
     var content_tv: TextView? = null
     var date_tv: TextView? = null
@@ -30,6 +30,9 @@ class Board_DetailActivity : AppCompatActivity() {
         comment_layout = findViewById(R.id.comment_layout)
         comment_et = findViewById(R.id.comment_et)
         reg_button = findViewById(R.id.reg_button)
+
+        clickedFQATitle = intent.getStringExtra("clickedFQATitle")
+
 
         // 등록하기 버튼을 눌렀을 때 댓글 등록 함수 호출
 

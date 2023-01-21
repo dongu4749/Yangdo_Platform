@@ -16,7 +16,7 @@ class OneToOneBoard : AppCompatActivity() {
     var reg_button: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qna_register)
+        setContentView(R.layout.activity_onetone_qna_register)
 
         // 컴포넌트 초기화
         title_et = findViewById(R.id.onetone_title_et)
