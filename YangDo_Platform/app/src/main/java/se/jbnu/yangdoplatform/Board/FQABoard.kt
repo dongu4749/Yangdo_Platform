@@ -33,7 +33,7 @@ data class FQABoardItem(val time:String, val title: String, val content: String)
 class FQABoard : AppCompatActivity() {
     // 로그에 사용할 TAG 변수 선언
     private val TAG = javaClass.simpleName
-
+    private var title_array_FAQ: ArrayList<BoardModel?> = ArrayList()
 
     // 사용할 컴포넌트 선언
     var boardModel = BoardModel("sendingTest","TestForSending")
@@ -41,6 +41,12 @@ class FQABoard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fqa_board)
+
+
+        val fqa_category_namebtn1: Button = findViewById(R.id.fqa_category_namebtn1)
+        val fqa_category_namebtn2: Button = findViewById(R.id.fqa_category_namebtn2)
+        val fqa_category_namebtn3: Button = findViewById(R.id.fqa_category_namebtn3)
+        val fqa_category_namebtn4: Button = findViewById(R.id.fqa_category_namebtn4)
 
 
         val fqa_board_back_button : ImageButton = findViewById(R.id.fqa_board_back_button)
@@ -66,14 +72,24 @@ class FQABoard : AppCompatActivity() {
 
         rv_board.adapter = boardAdapter
         rv_board.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        // 운영정책 버튼을 클릭할 시
+        fqa_category_namebtn1.setOnClickListener(View.OnClickListener {
+            val rv_board = findViewById<RecyclerView>(R.id.fqa_category_recyclerview)
+            val boardAdapterBtn = FQABoardAdapter("운영정책")
+            rv_board.adapter = boardAdapterBtn
+            rv_board.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        })
     }
 
     internal inner class FQABoardAdapter() :
         RecyclerView.Adapter<FQABoardAdapter.FQABoardViewHolder>() {
 
-        private val title_array_FAQ: MutableList<BoardModel?> = ArrayList()
+
+        var selectedCategoryName: String = ""
         val database = FirebaseDatabase.getInstance().reference
         val myRef = database.child("FAQ")
+
 
         init {
 
@@ -83,12 +99,32 @@ class FQABoard : AppCompatActivity() {
                     for (item in dataSnapshot.children) {
                         title_array_FAQ.add(item.getValue(BoardModel::class.java))
                     }
-                    //ListView를 새로고침해준다
+                    // View를 새로고침해준다
                     notifyDataSetChanged()
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
+        }
+
+        constructor(selectedCategoryName: String): this(){
+            this.selectedCategoryName = selectedCategoryName
+            title_array_FAQ = ArrayList()
+            println(title_array_FAQ)
+            FirebaseDatabase.getInstance().reference.child("FAQ").addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (item in dataSnapshot.children) {
+                        var categoryNameInFirebase: String = item.getValue(BoardModel::class.java)?.category.toString()
+                        if(selectedCategoryName.equals(categoryNameInFirebase)){
+                            title_array_FAQ.add(item.getValue(BoardModel::class.java))
+                            Log.v("TESTININININ", categoryNameInFirebase)
+                            println(title_array_FAQ)
+                        }
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
+            println(title_array_FAQ)
         }
 
 
