@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import se.jbnu.yangdoplatform.Board.OneToOneBoard
 import se.jbnu.yangdoplatform.Board.FQABoard
+import se.jbnu.yangdoplatform.Board.NotificationBoard
 import se.jbnu.yangdoplatform.HomeActivity
 import se.jbnu.yangdoplatform.R
 import se.jbnu.yangdoplatform.model.UserModel
@@ -82,7 +83,10 @@ class Fragment_MyInfo : Fragment() {
 
         listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             when(position){
-                0 -> Toast.makeText(requireActivity(), "공지사항으로 이동합니다.", Toast.LENGTH_SHORT).show()
+                0 -> {
+                    val intent = Intent(requireContext(), NotificationBoard::class.java)
+                    startActivity(intent)
+                }
                 1 -> {
                     val intent = Intent(requireContext(), FQABoard::class.java)
                     startActivity(intent)
@@ -90,27 +94,6 @@ class Fragment_MyInfo : Fragment() {
                 else -> Log.v("TESTTAG", position.toString())
             }
         }
-
-
-//        listView.setOnItemClickListener  { parent, view, position, id ->
-//            // handle the click event
-//            Log.v("TESTTAG", position.toString())
-//            when(position){
-//                0 -> Toast.makeText(requireActivity(), "공지사항으로 이동합니다.", Toast.LENGTH_SHORT).show()
-//                1 -> {
-//                    val intent = Intent(requireContext(), QnABoard::class.java)
-//                    startActivity(intent)
-//                }
-//                2 -> {
-//                    val intent = Intent(requireContext(), OneToOneBoard::class.java)
-//                    startActivity(intent)
-//                }
-//                else -> Log.v("TESTTAG", position.toString())
-//            }
-//
-//        }
-
-
 
 
 
