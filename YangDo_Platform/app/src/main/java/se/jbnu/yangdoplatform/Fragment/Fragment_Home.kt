@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import se.jbnu.yangdoplatform.Board.Board_RegisterActivity
 import se.jbnu.yangdoplatform.R
+import se.jbnu.yangdoplatform.Search.SearchActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -27,6 +28,7 @@ class Fragment_Home : Fragment(), View.OnClickListener {
     private var fab_home: FloatingActionButton? = null
     private var fab_gym: FloatingActionButton? = null
     private var fab_register: FloatingActionButton? = null
+    private var fab_search: FloatingActionButton? = null
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -62,10 +64,13 @@ class Fragment_Home : Fragment(), View.OnClickListener {
         fab_home = v.findViewById<View>(R.id.fab_home) as FloatingActionButton
         fab_gym = v.findViewById<View>(R.id.fab_gym) as FloatingActionButton
         fab_register = v.findViewById<View>(R.id.fab_register) as FloatingActionButton
+        fab_search = v.findViewById<View>(R.id.fab_search) as FloatingActionButton
         fab_main!!.setOnClickListener(this)
         fab_home!!.setOnClickListener(this)
         fab_gym!!.setOnClickListener(this)
         fab_register!!.setOnClickListener(this)
+        fab_search!!.setOnClickListener(this)
+
         return v
     }
 
@@ -75,6 +80,11 @@ class Fragment_Home : Fragment(), View.OnClickListener {
             R.id.fab_main -> anim()
             R.id.fab_home -> anim()
             R.id.fab_gym -> anim()
+            R.id.fab_search -> {
+                anim()
+                val intent = Intent(requireActivity().applicationContext, SearchActivity::class.java)
+                startActivity(intent)
+            }
             R.id.fab_register -> {
                 anim()
                 val intent = Intent(requireActivity().applicationContext, Board_RegisterActivity::class.java)
@@ -89,8 +99,10 @@ class Fragment_Home : Fragment(), View.OnClickListener {
             fab_home!!.startAnimation(fab_close)
             fab_gym!!.startAnimation(fab_close)
             fab_register!!.startAnimation(fab_close)
+            fab_search!!.startAnimation(fab_close)
             fab_home!!.isClickable = false
             fab_gym!!.isClickable = false
+            fab_search!!.isClickable = false
             fab_register!!.isClickable = false
             isFabOpen = false
         } else {
@@ -98,9 +110,11 @@ class Fragment_Home : Fragment(), View.OnClickListener {
             fab_home!!.startAnimation(fab_open)
             fab_gym!!.startAnimation(fab_open)
             fab_register!!.startAnimation(fab_open)
+            fab_search!!.startAnimation(fab_open)
             fab_home!!.isClickable = true
             fab_gym!!.isClickable = true
             fab_register!!.isClickable = true
+            fab_search!!.isClickable = true
             isFabOpen = true
         }
     }

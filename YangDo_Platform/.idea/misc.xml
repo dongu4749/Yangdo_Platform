@@ -41,6 +41,7 @@
         <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/menu/bottom_nav.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/menu/toolbar_menu.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/dongu/Documents/GitHub/Yangdo_Platfrom/YangDoPlatform/app/src/main/res/xml/settings_preference.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/hh/AppData/Local/Android/Sdk/platforms/android-33/data/res/layout/simple_list_item_1.xml" value="0.3625" />
         <entry key="..\:/projects/Yangdo_Platform/YangDoPlatform/app/src/main/res/layout/activity_board_register.xml" value="0.24537037037037038" />
         <entry key="..\:/projects/Yangdo_Platform/YangDoPlatform/app/src/main/res/layout/activity_search.xml" value="0.24512820512820513" />
         <entry key="..\:/projects/Yangdo_Platform/YangDoPlatform/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
@@ -61,8 +62,9 @@
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/activity_notification_board.xml" value="0.25" />
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/activity_onetone_qna_register.xml" value="0.25" />
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/activity_qna_register.xml" value="0.3625" />
-        <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/activity_search.xml" value="0.2" />
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/fragment__home.xml" value="0.3625" />
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/fragment__my_info.xml" value="0.25" />
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/item_chat.xml" value="0.25" />
         <entry key="..\:/projects/Yangdo_Platform/YangDo_Platform/app/src/main/res/layout/item_fqa_board.xml" value="0.24895833333333334" />

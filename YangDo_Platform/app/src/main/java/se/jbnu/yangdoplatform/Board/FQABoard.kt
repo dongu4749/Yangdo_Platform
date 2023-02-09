@@ -2,7 +2,6 @@ package se.jbnu.yangdoplatform.Board
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,21 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import se.jbnu.yangdoplatform.Fragment.Fragment_Chat
+import com.google.firebase.database.*
 import se.jbnu.yangdoplatform.R
-import se.jbnu.yangdoplatform.chat.MessageActivity
-import se.jbnu.yangdoplatform.model.BoardModel
-import se.jbnu.yangdoplatform.model.ChatModel
-import se.jbnu.yangdoplatform.model.UserModel
+import se.jbnu.yangdoplatform.model.FAQModel
 
 data class FQABoardItem(val time:String, val title: String, val content: String)
 
@@ -33,10 +25,11 @@ data class FQABoardItem(val time:String, val title: String, val content: String)
 class FQABoard : AppCompatActivity() {
     // 로그에 사용할 TAG 변수 선언
     private val TAG = javaClass.simpleName
-    private var title_array_FAQ: ArrayList<BoardModel?> = ArrayList()
+    private var title_array_FAQ: ArrayList<FAQModel?> = ArrayList()
+    private var searchView_fqa: SearchView? = null
 
     // 사용할 컴포넌트 선언
-    var boardModel = BoardModel("sendingTest","TestForSending")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +40,7 @@ class FQABoard : AppCompatActivity() {
         val fqa_category_namebtn2: Button = findViewById(R.id.fqa_category_namebtn2)
         val fqa_category_namebtn3: Button = findViewById(R.id.fqa_category_namebtn3)
         val fqa_category_namebtn4: Button = findViewById(R.id.fqa_category_namebtn4)
-
+        searchView_fqa = findViewById(R.id.search_view_fqa)
 
         val fqa_board_back_button : ImageButton = findViewById(R.id.fqa_board_back_button)
         fqa_board_back_button.setOnClickListener(View.OnClickListener {
@@ -65,24 +58,82 @@ class FQABoard : AppCompatActivity() {
         })
 
 
-        val rv_board = findViewById<RecyclerView>(R.id.fqa_category_recyclerview)
-        val boardAdapter = FQABoardAdapter()
 
-        boardAdapter.notifyDataSetChanged()
 
-        rv_board.adapter = boardAdapter
-        rv_board.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        val rv_FAQBoard = findViewById<RecyclerView>(R.id.fqa_category_recyclerview)
+        val fAQAdapter = FQABoardAdapter()
+
+        fAQAdapter.notifyDataSetChanged()
+
+        rv_FAQBoard.adapter = fAQAdapter
+        rv_FAQBoard.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         // 운영정책 버튼을 클릭할 시
         fqa_category_namebtn1.setOnClickListener(View.OnClickListener {
-            val rv_board = findViewById<RecyclerView>(R.id.fqa_category_recyclerview)
-            val boardAdapterBtn = FQABoardAdapter("운영정책")
-            rv_board.adapter = boardAdapterBtn
-            rv_board.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            fqaSelectedBtn("운영정책", fAQAdapter)
+            rv_FAQBoard.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        })
+        fqa_category_namebtn2.setOnClickListener(View.OnClickListener {
+            fqaSelectedBtn("계정/인증", fAQAdapter)
+            rv_FAQBoard.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        })
+        fqa_category_namebtn3.setOnClickListener(View.OnClickListener {
+            fqaSelectedBtn("구매/판매", fAQAdapter)
+            rv_FAQBoard.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        })
+        fqa_category_namebtn4.setOnClickListener(View.OnClickListener {
+            fqaSelectedBtn("거래 품목", fAQAdapter)
+            rv_FAQBoard.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        })
+
+
+
+        // 검색어 입력 시
+        searchView_fqa!!.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(searchedString: String): Boolean {
+                // 목록 초기화를 위한 코드
+                title_array_FAQ.clear()
+                fAQAdapter.notifyDataSetChanged()
+
+
+                // 파이어베이스 안에 있는 제목만 검색
+                val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+                val ref: DatabaseReference = database.getReference().child("FAQ")
+                val query: Query = ref.orderByChild("title/").startAt(searchedString).endAt(searchedString + "\uf8ff")
+                query.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(@NonNull snapshot: DataSnapshot) {
+
+                        for (dataSnapshot in snapshot.getChildren()) {
+                            var faqTitleInFirebase: String = dataSnapshot.getValue(FAQModel::class.java)?.title.toString()
+                            if(searchedString.equals(faqTitleInFirebase)){
+                                title_array_FAQ.add(dataSnapshot.getValue(FAQModel::class.java))
+                                Log.v("TESTININININ", faqTitleInFirebase)
+                                println(title_array_FAQ)
+                                fAQAdapter.notifyDataSetChanged()
+                                rv_FAQBoard.layoutManager = LinearLayoutManager(this@FQABoard, LinearLayoutManager.VERTICAL, false)
+                            }
+
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+                return false
+            }
+
+            override fun onQueryTextChange(s: String): Boolean {
+                return false
+            }
         })
     }
 
-    internal inner class FQABoardAdapter() :
+    inner class FQABoardAdapter() :
         RecyclerView.Adapter<FQABoardAdapter.FQABoardViewHolder>() {
 
 
@@ -97,26 +148,32 @@ class FQABoard : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                     for (item in dataSnapshot.children) {
-                        title_array_FAQ.add(item.getValue(BoardModel::class.java))
+                        title_array_FAQ.add(item.getValue(FAQModel::class.java))
                     }
                     // View를 새로고침해준다
                     notifyDataSetChanged()
+
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
+            // 새로고침 후 초기화를 해준다
+
         }
 
         constructor(selectedCategoryName: String): this(){
             this.selectedCategoryName = selectedCategoryName
-            title_array_FAQ = ArrayList()
+            title_array_FAQ.clear()
+            notifyDataSetChanged()
+
             println(title_array_FAQ)
             FirebaseDatabase.getInstance().reference.child("FAQ").addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (item in dataSnapshot.children) {
-                        var categoryNameInFirebase: String = item.getValue(BoardModel::class.java)?.category.toString()
+                        var categoryNameInFirebase: String = item.getValue(FAQModel::class.java)?.category.toString()
                         if(selectedCategoryName.equals(categoryNameInFirebase)){
-                            title_array_FAQ.add(item.getValue(BoardModel::class.java))
+                            title_array_FAQ.add(item.getValue(FAQModel::class.java))
+                            notifyDataSetChanged()
                             Log.v("TESTININININ", categoryNameInFirebase)
                             println(title_array_FAQ)
                         }
@@ -166,6 +223,27 @@ class FQABoard : AppCompatActivity() {
         }
     }
 
+
+    fun fqaSelectedBtn(selectedCategoryName: String, fAQAdapter: FQABoardAdapter){
+        title_array_FAQ.clear()
+        fAQAdapter.notifyDataSetChanged()
+
+        println(title_array_FAQ)
+        FirebaseDatabase.getInstance().reference.child("FAQ").addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (item in dataSnapshot.children) {
+                    var categoryNameInFirebase: String = item.getValue(FAQModel::class.java)?.category.toString()
+                    if(selectedCategoryName.equals(categoryNameInFirebase)){
+                        title_array_FAQ.add(item.getValue(FAQModel::class.java))
+                        fAQAdapter.notifyDataSetChanged()
+                        Log.v("TESTININININ", categoryNameInFirebase)
+                        println(title_array_FAQ)
+                    }
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
 
 
 }
