@@ -107,7 +107,7 @@ class FQABoard : AppCompatActivity() {
 
                         for (dataSnapshot in snapshot.getChildren()) {
                             var faqTitleInFirebase: String = dataSnapshot.getValue(FAQModel::class.java)?.title.toString()
-                            if(searchedString.equals(faqTitleInFirebase)){
+                            if(faqTitleInFirebase.contains(searchedString)){
                                 title_array_FAQ.add(dataSnapshot.getValue(FAQModel::class.java))
                                 Log.v("TESTININININ", faqTitleInFirebase)
                                 println(title_array_FAQ)

@@ -60,25 +60,31 @@
                     android:id="@+id/fqa_detail_board_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:text="이웃들이 자주 묻는 질문을 확인해보세요"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
 
 
-                <TextView
-                    android:id="@+id/fqa_detail_board_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="TextView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+
+                    android:id="@+id/tv_from_html_message"
+
+                    android:text="tv_from_html_message"
+
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginTop="50dp"
                     android:gravity="center"
                     android:text="그래도 해결이 안 되시나요?" />
 
