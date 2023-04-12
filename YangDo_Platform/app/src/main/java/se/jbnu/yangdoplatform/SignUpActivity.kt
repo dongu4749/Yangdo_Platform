@@ -37,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         signUp_userProfileImage = findViewById(R.id.signUp_userProfileImage)
         findViewById<View>(R.id.check).setOnClickListener(onClickListener)
         // nullPoint Error 방지코드_/초기 이미지 넣기 실패
-        val firstProfileimageFile = File("\\src\\main\\res\\drawable-v24\\user_img.png")
+        val firstProfileimageFile = File("drawable-v24/user_img.png")
         val absolutePath = firstProfileimageFile.absolutePath
         filePath = Uri.parse(absolutePath)
         Log.v("filepath_TAG", filePath.toString())
@@ -72,6 +72,7 @@ class SignUpActivity : AppCompatActivity() {
                                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
                                     uploadImageToFirebase(bitmap)
                                 } catch (e: IOException) {
+                                    Log.v("TagTagTag", "FailTagProfileFailed")
                                     e.printStackTrace()
                                 }
                                 Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
@@ -136,6 +137,8 @@ class SignUpActivity : AppCompatActivity() {
         val uploadTask = profileRef.putBytes(data)
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
+            Log.v("TagTagTag", "FailTagSignup")
+            profileRef.putFile(filePath!!)
         }.addOnSuccessListener { }
     }
 

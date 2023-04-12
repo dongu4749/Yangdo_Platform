@@ -13,7 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YangDoPlatform">
         <activity
+            android:name=".Board.OneToOneBoard"
+            android:exported="false" />
+        <activity
+            android:name=".Search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".Board.Board_RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Board.Board_From_FAQ_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Board.NotificationBoard"
+            android:exported="false" />
+        <activity
+            android:name=".Board.FQABoard"
             android:exported="false" />
         <activity
             android:name=".Board.Board_DetailActivity"

@@ -16,6 +16,10 @@ class Board_DetailActivity : AppCompatActivity() {
     var comment_layout: LinearLayout? = null
     var comment_et: EditText? = null
     var reg_button: Button? = null
+    private var clickedFQATitle: String? = null
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)

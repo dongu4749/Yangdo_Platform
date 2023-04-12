@@ -141,20 +141,20 @@ class Fragment_People : Fragment() {
 
         // 파이어베이스에서 이미지 다운 받고 화면에 표시하기
         val imageRef = storageRef.child(myUid + "profile.jpg")
-        imageRef?.downloadUrl?.addOnSuccessListener { uri -> // Got the download URL for 'users/me/profile.png'
+        imageRef?.downloadUrl?.addOnFailureListener { // Handle any errors
+            Log.v("TagTagTag", "FailTag")
+
+        }?.addOnSuccessListener { uri -> // Got the download URL for 'users/me/profile.png'
             // 액티비티와 프래그먼트 생명주기 차이로 발생하는 getActivity-null 값 방지
             if (activity == null) {
                 Log.v("SUPERTAG", "ININININININ")
             } else {
                 val downloadUrl = uri.toString()
                 Glide.with(requireActivity())
-                        .load(downloadUrl)
-                        .into(userProfileImage)
+                    .load(downloadUrl)
+                    .into(userProfileImage)
             }
-        }?.addOnFailureListener { // Handle any errors
-            Log.v("TagTagTag", "FailTag")
         }
-                ?: Log.v("TagTagTag", imageRef.toString())
     }
 
     companion object {
